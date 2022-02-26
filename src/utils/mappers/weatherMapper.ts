@@ -1,6 +1,6 @@
-import { DayForecastData, ForecastData } from "../../resources/interfaces";
-import { getDayName } from "../../services/dateService";
-import groupByKey from "../../services/groupByKey";
+import { DayForecastData, ForecastData } from "resources/interfaces";
+import { getDayName } from "services/dateService";
+import groupByKey from "services/groupByKey";
 /**
  * Map weather data object
  * @returns {ForecastData} Mapped weather forecast object

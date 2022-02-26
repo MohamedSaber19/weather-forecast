@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { DEFAULT_LAT, DEFAULT_LON } from "resources/constants";
 
 interface Location {
   latitude: number;
@@ -15,8 +16,8 @@ const useCurrentLocation = (options: PositionOptions = {}) => {
       setError("Geolocation is not supported.");
       // fallback to cairo latitude & longitude in case we can't access user's device geolocation
       setLocation({
-        latitude: 30.0444,
-        longitude: 31.2357,
+        latitude: DEFAULT_LAT,
+        longitude: DEFAULT_LON,
       });
       return;
     }
@@ -42,8 +43,8 @@ const useCurrentLocation = (options: PositionOptions = {}) => {
   const handleError = (err: GeolocationPositionError) => {
     // fallback to cairo latitude & longitude in case we can't access user's device geolocation
     setLocation({
-      latitude: 30.0444,
-      longitude: 31.2357,
+      latitude: DEFAULT_LAT,
+      longitude: DEFAULT_LON,
     });
     setError(err.message);
   };

@@ -1,5 +1,4 @@
 import { FC } from "react";
-import { WiCelsius } from "react-icons/wi";
 import { DayForecastData } from "resources/interfaces";
 import { getTime } from "services/dateService";
 
