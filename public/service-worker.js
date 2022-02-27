@@ -1,6 +1,6 @@
 /* eslint-disable no-restricted-globals */
 var CACHE_NAME = "forecast-cache";
-var urlsToCache = ["/", "/*"];
+var urlsToCache = ["/", "/static/css/", "/static/js/"];
 
 // Install a service worker
 self.addEventListener("install", (event) => {
@@ -28,7 +28,7 @@ self.addEventListener("fetch", (event) => {
 
 // Update a service worker
 self.addEventListener("activate", (event) => {
-  var cacheWhitelist = ["pwa-task-manager"];
+  var cacheWhitelist = ["forecast-cache"];
   event.waitUntil(
     caches.keys().then((cacheNames) => {
       return Promise.all(
