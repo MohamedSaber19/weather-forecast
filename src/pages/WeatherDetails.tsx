@@ -15,7 +15,7 @@ const WeatherDetails: FC = (): JSX.Element => {
   const { data } = location.state as State || [];
   const mappedData = data?.map((item: any) => dayForecastMapper(item)) || [];
 
-  const { day_name, day_date } = mappedData[0];
+  const { day_name, day_date } = mappedData[0]!;
   return (
     <article>
       <div className="px-4 py-5 sm:px-6 flex items-center justify-between">
