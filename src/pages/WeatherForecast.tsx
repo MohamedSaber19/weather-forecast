@@ -5,6 +5,7 @@ import { FcHome } from "react-icons/fc";
 import { Link } from "react-router-dom";
 import { DEFAULT_CITY, GPS_ACESS_ERR } from "resources/constants";
 import { CityForecastData, ForecastData, ListForecastDataItem } from "resources/interfaces";
+import getWeatherByTime from "services/getWeatherByTime";
 import useCurrentLocation from "utils/hooks/useCurrentLocation";
 import { dayForecastMapper, weatherMapper } from "utils/mappers/weatherMapper";
 
@@ -83,8 +84,8 @@ const WeatherForecast: FC = (): JSX.Element => {
                 {error && renderErrorMsg()}
             </div>
             <section className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-2 p-6">
-                {data.list.slice(0, 5).map((item: ListForecastDataItem) => {
-                    const mapped = dayForecastMapper(item.value[0]);
+                {data.list.slice(0, 5).map((item: any) => {
+                    const mapped = dayForecastMapper(getWeatherByTime("day_time", item.value));
                     // REVISIT: to get unified hour for all days not just getting first element
                     return (
                         <article key={item.date}>
