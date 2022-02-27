@@ -78,25 +78,25 @@ registerRoute(
 );
 
 // WORKING WHEN DISABLE CACHE IN BROWSER
-// registerRoute(
-//   ({ url }) => url.origin === "https://api.openweathermap.org",
-//   new NetworkFirst({
-//     cacheName: "cacheAPI",
-//   })
-// );
-
-// Cache open weather API response
 registerRoute(
   ({ url }) => url.origin === "https://api.openweathermap.org",
-  new StaleWhileRevalidate({
-    cacheName: "api-cache",
-    plugins: [
-      new CacheableResponsePlugin({
-        statuses: [200],
-      }),
-    ],
+  new NetworkFirst({
+    cacheName: "cacheAPI",
   })
 );
+
+// Cache open weather API response
+// registerRoute(
+//   ({ url }) => url.origin === "https://api.openweathermap.org",
+//   new StaleWhileRevalidate({
+//     cacheName: "api-cache",
+//     plugins: [
+//       new CacheableResponsePlugin({
+//         statuses: [200],
+//       }),
+//     ],
+//   })
+// );
 
 // This allows the web app to trigger skipWaiting via
 // registration.waiting.postMessage({type: 'SKIP_WAITING'})
