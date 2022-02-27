@@ -82,6 +82,12 @@ registerRoute(
   ({ url }) => url.origin === "https://api.openweathermap.org",
   new NetworkFirst({
     cacheName: "cacheAPI",
+    plugins: [
+      new CacheableResponsePlugin({
+        statuses: [200],
+      }),
+      new ExpirationPlugin({ maxEntries: 10 }),
+    ],
   })
 );
 
@@ -107,5 +113,3 @@ self.addEventListener("message", (event) => {
 });
 
 // Any other custom service worker logic can go here.
-
-
