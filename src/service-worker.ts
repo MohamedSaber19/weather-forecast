@@ -77,19 +77,17 @@ registerRoute(
   })
 );
 
-// This allows the web app to trigger skipWaiting via
-// registration.waiting.postMessage({type: 'SKIP_WAITING'})
-self.addEventListener("message", (event) => {
-  if (event.data && event.data.type === "SKIP_WAITING") {
-    self.skipWaiting();
-  }
-});
-
-// Any other custom service worker logic can go here.
+// WORKING WHEN DISABLE CACHE IN BROWSER
+// registerRoute(
+//   ({ url }) => url.origin === "https://api.openweathermap.org",
+//   new NetworkFirst({
+//     cacheName: "cacheAPI",
+//   })
+// );
 
 // Cache open weather API response
 registerRoute(
-  ({ url }) => url.pathname.startsWith("https://api"),
+  ({ url }) => url.origin === "https://api.openweathermap.org",
   new StaleWhileRevalidate({
     cacheName: "api-cache",
     plugins: [
@@ -100,7 +98,14 @@ registerRoute(
   })
 );
 
-// registerRoute(
-//   ({url}) => url.pathname.startsWith('/api.openweathermap.org/'),
-//   new NetworkFirst()
-// );
+// This allows the web app to trigger skipWaiting via
+// registration.waiting.postMessage({type: 'SKIP_WAITING'})
+self.addEventListener("message", (event) => {
+  if (event.data && event.data.type === "SKIP_WAITING") {
+    self.skipWaiting();
+  }
+});
+
+// Any other custom service worker logic can go here.
+
+
