@@ -89,7 +89,7 @@ self.addEventListener("message", (event) => {
 
 // Cache open weather API response
 registerRoute(
-  ({ url }) => url.pathname.startsWith("/api.openweathermap.org/"),
+  ({ url }) => url.pathname.startsWith("https://api"),
   new StaleWhileRevalidate({
     cacheName: "api-cache",
     plugins: [
