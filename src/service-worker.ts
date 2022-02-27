@@ -91,6 +91,24 @@ registerRoute(
   })
 );
 
+// Preacache open weather api icons
+registerRoute(
+  // Add in any other file extensions or routing criteria as needed.
+  ({ url }) =>
+    url.origin === "https://api.openweathermap.org" && url.pathname.endsWith(".png"),
+  // Customize this strategy as needed, e.g., by changing to CacheFirst.
+  new StaleWhileRevalidate({
+    cacheName: "weather-imgs",
+    plugins: [
+      // Ensure that once this runtime cache reaches a maximum size the
+      // least-recently used images are removed.
+      new ExpirationPlugin({ maxEntries: 50 }),
+    ],
+  })
+);
+
+
+//https://openweathermap.org/img .png
 // Cache open weather API response
 // registerRoute(
 //   ({ url }) => url.origin === "https://api.openweathermap.org",
