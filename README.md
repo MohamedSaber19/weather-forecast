@@ -76,3 +76,11 @@ npx serve -s build
 ## Demo
 
 You can check the live version of the app [here](https://fp-weather-forecast.herokuapp.com/)
+
+> This app is PWA so it's working offline & can be installed as desktop application from browser
+as shown in the below screenshot
+
+![Screenshot](./src/assets/images/PWA-install.PNG)
+
+> Learn more about PWA [here](https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps)
+
