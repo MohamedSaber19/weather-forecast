@@ -8,7 +8,7 @@ type Props = {
 
 const DayForecast: FC<Props> = ({ data }): JSX.Element => {
   const { icon, state, day_name, temp, dt_txt } = data;
-  const imgURL = `http://openweathermap.org/img/wn/${icon}@2x.png`;
+  const imgURL = `https://openweathermap.org/img/wn/${icon}@2x.png`;
 
   return (
     <div className="hover:bg-teal-50 p-6 max-w-sm mx-auto bg-white rounded-xl shadow-lg flex flex-col items-center space-x-4">

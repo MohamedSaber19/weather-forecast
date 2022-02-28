@@ -95,7 +95,7 @@ registerRoute(
 registerRoute(
   // Add in any other file extensions or routing criteria as needed.
   ({ url }) =>
-    url.origin === "http://openweathermap.org" && url.pathname.endsWith(".png"),
+    url.origin === "https://openweathermap.org" && url.pathname.endsWith(".png"),
   // Customize this strategy as needed, e.g., by changing to CacheFirst.
   new StaleWhileRevalidate({
     cacheName: "weather-imgs",
