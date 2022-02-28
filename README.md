@@ -57,17 +57,17 @@ npm i
 
 You can start/build your app with the below commands
 
+start app locally
 ``` js
-// start app locally
 npm run start:local
 ```
+start new build
 ``` js
-// start new build
 npm run build
 ```
+serve your build locally
 ``` js
-// serve your build locally [You need to install serve package]
-serve -s build
+npx serve -s build
 ```
 
 ## Demo
