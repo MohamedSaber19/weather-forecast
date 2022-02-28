@@ -36,7 +36,7 @@ const WeatherDetails: React.FC = (): JSX.Element => {
     }
     // render content
     return (
-      <section className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
+      <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-3 p-3 md:p-6">
         {mappedData?.map((item: IDayForecastData) => {
           return (
             <article key={item.dt_txt}>
