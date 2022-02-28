@@ -77,7 +77,7 @@ registerRoute(
   })
 );
 
-// WORKING WHEN DISABLE CACHE IN BROWSER
+// Cache open weather API but using (Network First Strategie)
 registerRoute(
   ({ url }) => url.origin === "https://api.openweathermap.org",
   new NetworkFirst({
@@ -91,11 +91,11 @@ registerRoute(
   })
 );
 
-// Preacache open weather api icons
+// Cache open weather api icons
 registerRoute(
   // Add in any other file extensions or routing criteria as needed.
   ({ url }) =>
-    url.origin === "https://api.openweathermap.org" && url.pathname.endsWith(".png"),
+    url.origin === "http://openweathermap.org" && url.pathname.endsWith(".png"),
   // Customize this strategy as needed, e.g., by changing to CacheFirst.
   new StaleWhileRevalidate({
     cacheName: "weather-imgs",
@@ -106,21 +106,6 @@ registerRoute(
     ],
   })
 );
-
-
-//https://openweathermap.org/img .png
-// Cache open weather API response
-// registerRoute(
-//   ({ url }) => url.origin === "https://api.openweathermap.org",
-//   new StaleWhileRevalidate({
-//     cacheName: "api-cache",
-//     plugins: [
-//       new CacheableResponsePlugin({
-//         statuses: [200],
-//       }),
-//     ],
-//   })
-// );
 
 // This allows the web app to trigger skipWaiting via
 // registration.waiting.postMessage({type: 'SKIP_WAITING'})
