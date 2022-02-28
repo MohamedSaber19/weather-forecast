@@ -1,9 +1,14 @@
-export interface ForecastData {
-  city: CityForecastData;
-  list: ListForecastDataItem[];
+export interface ILocation {
+  latitude: number;
+  longitude: number;
 }
 
-export interface DayForecastData {
+export interface IForecastData {
+  city: ICityForecastData;
+  list: IListForecastDataItem[];
+}
+
+export interface IDayForecastData {
   dt: number;
   temp: number;
   feels_like: number;
@@ -19,14 +24,21 @@ export interface DayForecastData {
   day_name: string;
 }
 
-export interface CityForecastData {
+export interface ICityForecastData {
   name: string;
   country: string;
   sunrise: number;
   sunset: number;
 }
 
-export interface ListForecastDataItem {
+export interface IListForecastDataItem {
   date: string;
-  value: DayForecastData[];
+  value: IDayForecastData[];
+}
+
+export interface IErrorMSG {
+  message: string;
+  imgURL: string;
+  linkURL: string;
+  linkText: string;
 }

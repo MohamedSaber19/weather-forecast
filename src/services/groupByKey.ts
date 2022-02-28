@@ -1,7 +1,14 @@
-import { ListForecastDataItem } from "resources/interfaces";
+import { IListForecastDataItem } from "resources/interfaces";
 
+/**
+ * generate new shape for the array of retrieved data from api
+ * @function groupByKey 
+ * @param {Array} array raw weather data list
+ * @param {String} key key to map data with
+ * @returns {IListForecastDataItem} new formatted array
+ */
 export default function groupByKey(array: any[], key: string) {
-  let forecastData = [] as ListForecastDataItem[];
+  let forecastData = [] as IListForecastDataItem[];
   // adding 2 new properties [day_date & day_time]
   const mappedArray = array.map((item: any) => ({
     ...item,

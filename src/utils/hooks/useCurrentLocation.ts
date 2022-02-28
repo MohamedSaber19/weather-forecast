@@ -1,14 +1,15 @@
 import { useEffect, useState } from "react";
 import { DEFAULT_LAT, DEFAULT_LON } from "resources/constants";
+import { ILocation } from "resources/interfaces";
 
-interface Location {
-  latitude: number;
-  longitude: number;
-}
-
+/**
+ * React hook to get user current location using geolocation services
+ * @function useCurrentLocation
+ * @param {PositionOptions} options
+ */
 const useCurrentLocation = (options: PositionOptions = {}) => {
   const [error, setError] = useState("");
-  const [location, setLocation] = useState({} as Location);
+  const [location, setLocation] = useState({} as ILocation);
 
   useEffect(() => {
     // If the geolocation is not defined in the used browser you can handle it as an error

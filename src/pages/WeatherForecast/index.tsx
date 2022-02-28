@@ -1,25 +1,28 @@
 import loader from "assets/images/loader.svg";
-import DayForecast from "components/DayForecast";
-import { FC, useCallback, useEffect, useState } from "react";
+import DayForecast from "components/shared/DayForecast";
+import { useCallback, useEffect, useState } from "react";
 import { FcHome } from "react-icons/fc";
 import { Link } from "react-router-dom";
-import { DEFAULT_CITY, GPS_ACESS_ERR } from "resources/constants";
-import { CityForecastData, ForecastData, ListForecastDataItem } from "resources/interfaces";
+import { DAY_PM_TIME, DEFAULT_CITY, GPS_ACESS_ERR } from "resources/constants";
+import { ICityForecastData, IForecastData, IListForecastDataItem } from "resources/interfaces";
 import getWeatherByTime from "services/getWeatherByTime";
 import useCurrentLocation from "utils/hooks/useCurrentLocation";
 import { dayForecastMapper, weatherMapper } from "utils/mappers/weatherMapper";
 
 const apiKey = process.env.REACT_APP_WEATHER_API_KEY as string;
+
 const geolocationOptions: PositionOptions = {
     timeout: 1000 * 60 * 1,
     enableHighAccuracy: true
 };
-const initialState: ForecastData = {
-    city: {} as CityForecastData,
-    list: [] as ListForecastDataItem[]
+
+const initialState: IForecastData = {
+    city: {} as ICityForecastData,
+    list: [] as IListForecastDataItem[]
 }
-const WeatherForecast: FC = (): JSX.Element => {
-    const [data, setData] = useState<ForecastData>(initialState);
+
+const WeatherForecast: React.FC = (): JSX.Element => {
+    const [data, setData] = useState<IForecastData>(initialState);
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const { location, error } = useCurrentLocation(geolocationOptions);
 
@@ -64,14 +67,17 @@ const WeatherForecast: FC = (): JSX.Element => {
         return (<p className="text-gray-400">{GPS_ACESS_ERR} <b>{DEFAULT_CITY}</b></p>);
     }
 
+    // Fetching data
     useEffect(() => {
         fetchWeatherData()
     }, [fetchWeatherData])
 
-
+    // render pre-loader
     if (isLoading) {
         return renderLoader();
     }
+
+    // render content
     return (
         <article className="bg-slate-50">
             <div className="px-4 py-5 sm:px-6">
@@ -79,14 +85,12 @@ const WeatherForecast: FC = (): JSX.Element => {
                     <h2 className="text-black text-2xl font-bold text-center flex items-center content-center">
                         <FcHome />
                         <span className="ml-2">{data.city.name}, {data.city.country}</span>
-                    </h2>
-                }
+                    </h2>}
                 {error && renderErrorMsg()}
             </div>
             <section className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-2 p-6">
                 {data.list.slice(0, 5).map((item: any) => {
-                    const mapped = dayForecastMapper(getWeatherByTime("day_time", item.value));
-                    // REVISIT: to get unified hour for all days not just getting first element
+                    const mapped = dayForecastMapper(getWeatherByTime(DAY_PM_TIME, item.value));
                     return (
                         <article key={item.date}>
                             <Link

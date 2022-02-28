@@ -1,4 +1,3 @@
-import { FC } from 'react';
 import {
   BrowserRouter as Router,
   Route,
@@ -9,7 +8,7 @@ import WeatherDetails from 'pages/WeatherDetails';
 import WeatherForecast from 'pages/WeatherForecast';
 
 
-const App: FC = (): JSX.Element => {
+const App: React.FC = (): JSX.Element => {
 
   return (
     <main className="min-h-screen p-5 bg-slate-300">

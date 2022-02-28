@@ -1,20 +1,23 @@
-import { DayForecastData, ForecastData } from "resources/interfaces";
+import { IDayForecastData, IForecastData } from "resources/interfaces";
 import { getDayName } from "services/dateService";
 import groupByKey from "services/groupByKey";
 /**
  * Map weather data object
- * @returns {ForecastData} Mapped weather forecast object
+ * @returns {IForecastData} Mapped weather forecast object
  */
-export function weatherMapper(data: ForecastData): ForecastData {
-  const grouped = groupByKey(data.list, "day_date");
-  return { city: data.city, list: grouped };
+export function weatherMapper(data: IForecastData): IForecastData {
+  const formattedList = groupByKey(data.list, "day_date");
+  return {
+    city: data.city,
+    list: formattedList,
+  };
 }
 
 /**
  * Map day data object
- * @returns {DayForecastData} Mapped day forecast object
+ * @returns {IDayForecastData} Mapped day forecast object
  */
-export function dayForecastMapper(data: any): DayForecastData {
+export function dayForecastMapper(data: any): IDayForecastData {
   return {
     dt: data.dt,
     temp: Math.round(data.main.temp),
